@@ -1,7 +1,9 @@
-import React from "react";
-import "./App.css";
-import ToDo from "./components/ToDo";
+import './App.css';
 
-export default function App() {
-  return <ToDo />;
+import React from 'react';
+import ToDo from './components/ToDo'
+
+export default function App () {
+  return <ToDo />
 }
+
