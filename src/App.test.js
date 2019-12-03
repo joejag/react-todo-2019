@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom/extend-expect'
 
-import { fireEvent, render } from '@testing-library/react'
-
 import App from './App'
 import React from 'react'
 import expectExport from 'expect'
+import { render } from '@testing-library/react'
 
 it('has a sample test', () => {
   const { getByText } = render(<App />)
