@@ -5,15 +5,12 @@ import React, { useState } from 'react'
 import Logo from '../assets/logo.png'
 import ToDoItem from './ToDoItem'
 
-const ToDo = () => {
-  const [list, setList] = useState([
-    { id: 1, text: 'clean the house' },
-    { id: 2, text: 'buy milk' }
-  ])
+const ToDo = ({ startingTodos }) => {
+  const [list, setList] = useState(startingTodos)
   const [toDo, setToDo] = useState('')
 
   const generateId = () => {
-    if (list && list.length > 1) {
+    if (list && list.length > 0) {
       return Math.max(...list.map(t => t.id)) + 1
     } else {
       return 1
@@ -21,15 +18,16 @@ const ToDo = () => {
   }
 
   const createNewToDoItem = () => {
-    // validate todo
-    if (!toDo) {
-      alert('Please enter a todo!')
-      return
-    }
-    const newId = generateId()
-    const newToDo = { id: newId, text: toDo }
-    setList([...list, newToDo])
-    setToDo('')
+    setTimeout(() => {
+      if (!toDo) {
+        alert('Please enter a todo!')
+        return
+      }
+      const newId = generateId()
+      const newToDo = { id: newId, text: toDo }
+      setList([...list, newToDo])
+      setToDo('')
+    }, 6000)
   }
 
   const handleKeyPress = e => {
@@ -52,11 +50,10 @@ const ToDo = () => {
       <h1 className='ToDo-Header'>React To Do</h1>
       <div className='ToDo-Container'>
         <div className='ToDo-Content'>
-          {list.map(item => {
-            return (
-              <ToDoItem key={item.id} item={item} deleteItem={deleteItem} />
-            )
-          })}
+          {list.map(item => (
+            <ToDoItem key={item.id} item={item} deleteItem={deleteItem} />
+          ))}
+          {list.length === 0 && <span>All done!</span>}
         </div>
 
         <div className='ToDoInput'>
