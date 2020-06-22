@@ -1,8 +1,8 @@
-import './App.css'
+import "./App.css"
 
-import React from 'react'
-import ToDo from './components/ToDo'
+import React from "react"
+import ToDo from "./components/ToDo"
 
-export default function App () {
+export default function App() {
   return <ToDo />
 }
