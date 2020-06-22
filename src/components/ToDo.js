@@ -13,7 +13,7 @@ const ToDo = () => {
   const [toDo, setToDo] = useState("")
 
   const generateId = () => {
-    if (list && list.length > 1) {
+    if (list?.length > 0) {
       return Math.max(...list.map((t) => t.id)) + 1
     } else {
       return 1
@@ -21,15 +21,17 @@ const ToDo = () => {
   }
 
   const createNewToDoItem = () => {
-    // validate todo
-    if (!toDo) {
-      alert("Please enter a todo!")
-      return
-    }
-    const newId = generateId()
-    const newToDo = { id: newId, text: toDo }
-    setList([...list, newToDo])
-    setToDo("")
+    Promise.resolve().then(() => {
+      // validate todo
+      if (!toDo) {
+        alert("Please enter a todo!")
+        return
+      }
+      const newId = generateId()
+      const newToDo = { id: newId, text: toDo }
+      setList([...list, newToDo])
+      setToDo("")
+    })
   }
 
   const handleKeyPress = (e) => {
@@ -55,10 +57,12 @@ const ToDo = () => {
           {list.map((item) => {
             return <ToDoItem key={item.id} item={item} deleteItem={deleteItem} />
           })}
+          {list.length === 0 && <span>All done!</span>}
         </div>
 
         <div className="ToDoInput">
-          <input type="text" value={toDo} onChange={handleInput} onKeyPress={handleKeyPress} />
+          <label htmlFor="new-item">Add new item </label>
+          <input id="new-item" type="text" value={toDo} onChange={handleInput} onKeyPress={handleKeyPress} />
           <button className="ToDo-Add" onClick={createNewToDoItem}>
             +
           </button>

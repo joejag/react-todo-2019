@@ -3,24 +3,61 @@ import "@testing-library/jest-dom/extend-expect"
 import App from "./App"
 import React from "react"
 import { render } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 
-it("has a sample test", () => {
+it("starts with two items already todo", () => {
   const { getByText } = render(<App />)
-  expect(getByText("React To Do")).toBeInTheDocument()
+
+  expect(getByText("clean the house")).toBeInTheDocument()
+  expect(getByText("buy milk")).toBeInTheDocument()
 })
 
-// TODO: Complete these tests
+it("allows you to add a new todo item", async () => {
+  const { getByLabelText, getByText, findByText } = render(<App />)
 
-it("starts with two items already todo", () => {})
-it("allows you to add a new todo item", () => {})
-it("allows you to remove a todo item", () => {})
-it("allows you to clear all of the todo items", () => {})
-it("can clear all items, add two new ones and delete the first", () => {
-  // this one has a bug. We are using the test to reveal it
+  userEvent.type(getByLabelText("Add new item"), "new item")
+  userEvent.click(getByText("+"))
+
+  expect(await findByText("new item")).toBeInTheDocument()
 })
+
+it("allows you to clear all of the todo items", () => {
+  const { getByLabelText, queryByText } = render(<App />)
+
+  userEvent.click(getByLabelText("Delete clean the house"))
+  userEvent.click(getByLabelText("Delete buy milk"))
+
+  expect(queryByText("clean the house")).not.toBeInTheDocument()
+  expect(queryByText("buy milk")).not.toBeInTheDocument()
+})
+
+it("can clear all items, add two new ones and delete the first", async () => {
+  const { findByText, getByLabelText, getByText, queryByText } = render(<App />)
+
+  userEvent.click(getByLabelText("Delete clean the house"))
+  userEvent.click(getByLabelText("Delete buy milk"))
+  userEvent.type(getByLabelText("Add new item"), "new item one")
+  userEvent.click(getByText("+"))
+  await findByText("new item one")
+  userEvent.type(getByLabelText("Add new item"), "new item two")
+  userEvent.click(getByText("+"))
+  await findByText("new item two")
+  userEvent.click(getByLabelText("Delete new item one"))
+
+  expect(queryByText("new item one")).not.toBeInTheDocument()
+  expect(getByText("new item two")).toBeInTheDocument()
+})
+
 it("works with async calls", () => {
-  // Add a setTimeout(() => {},5000) within ToDo.createNewToDoItem()
+  // Add a Promise.resolve().then(() => {} around the code in ToDo.createNewToDoItem()
+  // This will break two previous tests, fix them.
 })
+
 it("show a message if all todo items are completed", () => {
-  // this is a new feature. See if you can test drive it
+  const { getByLabelText, getByText } = render(<App />)
+
+  userEvent.click(getByLabelText("Delete clean the house"))
+  userEvent.click(getByLabelText("Delete buy milk"))
+
+  expect(getByText("All done!")).toBeInTheDocument()
 })
