@@ -6,6 +6,8 @@ First of all, open up the [React Testing Library cheatsheet](https://github.com/
 
 If you get stuck, you can ping Joe or have a look at the [completed version of the exercises](https://github.com/joejag/react-todo-2019/blob/final/src/App.test.js).
 
+You can run the application to see your changes with `npm start`.
+
 ## Exercise instructions
 
 Progress one by one through the exercises.
