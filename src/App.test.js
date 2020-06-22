@@ -48,11 +48,6 @@ it("can clear all items, add two new ones and delete the first", async () => {
   expect(getByText("new item two")).toBeInTheDocument()
 })
 
-it("works with async calls", () => {
-  // Add a Promise.resolve().then(() => {} around the code in ToDo.createNewToDoItem()
-  // This will break two previous tests, fix them.
-})
-
 it("show a message if all todo items are completed", () => {
   const { getByLabelText, getByText } = render(<App />)
 
