@@ -16,12 +16,12 @@ You can do these exercises without ever using the approach of adding a TestId to
 
 When testing, use [this preference order](https://testing-library.com/docs/guide-which-query) when deciding how to test something:
 
-- Visible
+- Queries Accessible to Everyone
   - ByLabelText
   - ByPlaceholderText
   - ByText
   - ByDisplayValue
-- Semantic
+- Semantic Queries
   - ByAltText
   - ByTitle
   - ByRole
