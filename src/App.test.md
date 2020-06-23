@@ -14,16 +14,19 @@ Progress one by one through the exercises.
 
 You can do these exercises without ever using the approach of adding a TestId to an element. You are encouraged to change the existing code to improve the ability to test it. Sometimes this is best done by making things more accessible.
 
-When testing, use this preference order when deciding how to test something:
+When testing, use [this preference order](https://testing-library.com/docs/guide-which-query) when deciding how to test something:
 
-- ByLabelText
-- ByPlaceholderText
-- ByText
-- ByDisplayValue
-- ByAltText
-- ByTitle
-- ByRole
-- ByTestId (do not use this in this workshop!)
+- Visible
+  - ByLabelText
+  - ByPlaceholderText
+  - ByText
+  - ByDisplayValue
+- Semantic
+  - ByAltText
+  - ByTitle
+  - ByRole
+- TestId
+  - ByTestId (do not use this in this workshop!)
 
 Good luck!
 
